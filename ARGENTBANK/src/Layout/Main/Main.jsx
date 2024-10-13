@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 function Main({ children }) {
-  return <div>{children}</div>;
+  return <div className='main'>{children}</div>;
 }
 
 Main.propTypes = {

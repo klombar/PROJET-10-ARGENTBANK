@@ -1,7 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+// Action pour vérifier l'authentification au démarrage
+export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('No token found');
+  }
+  return token; // On retourne le token pour l'utiliser dans le state
+});
 
-export const login = createAsyncThunk('auth/login', async (Auth, thunkAPI) => {
+export const login = createAsyncThunk('auth/login', async ({ email, password, rememberMe }, thunkAPI) => {
   try {
     const response = await fetch('http://localhost:3001/api/v1/user/login', {
       method: 'POST',
@@ -9,8 +17,8 @@ export const login = createAsyncThunk('auth/login', async (Auth, thunkAPI) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: Auth.email,
-        password: Auth.password,
+        email,
+        password,
       }),
     });
 
@@ -20,7 +28,13 @@ export const login = createAsyncThunk('auth/login', async (Auth, thunkAPI) => {
 
     const data = await response.json();
     console.log('API Response (login):', data);
-    return data.body;  // L'objet body contenant le token et d'autres informations.
+    
+    // Si rememberMe est coché, stocker le token dans le localStorage
+    if (rememberMe) {
+      localStorage.setItem('token', data.body.token);
+    }
+
+    return data.body; // L'objet body contenant le token et d'autres informations.
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -38,7 +52,7 @@ export const fetchUserProfile = createAsyncThunk('auth/fetchUserProfile', async 
 
   try {
     const response = await fetch('http://localhost:3001/api/v1/user/profile', {
-      method: 'POST', 
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
@@ -50,8 +64,6 @@ export const fetchUserProfile = createAsyncThunk('auth/fetchUserProfile', async 
     }
 
     const data = await response.json();
-    console.log("Profil utilisateur récupéré:", data);
-
     return data.body;
   } catch (error) {
     console.error('Error fetching user profile:', error);
@@ -62,28 +74,32 @@ export const fetchUserProfile = createAsyncThunk('auth/fetchUserProfile', async 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: null,       
-    token: null,      
-    status: 'idle',   
-    error: null,      
+    user: null,
+    token: localStorage.getItem('token'), // Charge le token au démarrage
+    status: 'idle',
+    error: null,
   },
   reducers: {
     logout: (state) => {
       state.user = null;
-      state.token = null;
+      state.token = null; // Réinitialise le token dans le state
+      localStorage.removeItem('token'); // Supprime le token du localStorage
       state.status = 'idle';
     },
   },
   extraReducers: (builder) => {
     builder
-      // Gestion de la connexion
+      .addCase(checkAuth.fulfilled, (state, action) => {
+        state.token = action.payload; 
+        state.status = 'succeeded';
+      })
       .addCase(login.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(login.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.token = action.payload.token;
-        console.log('Token après connexion:', action.payload.token);
+        state.token = action.payload.token; // Assigne le token à l'état
+        // Note : Le stockage du token dans le localStorage se fait dans l'action login
       })
       .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
@@ -95,7 +111,6 @@ const authSlice = createSlice({
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.user = action.payload;
-        console.log('Profil utilisateur récupéré:', action.payload);
       })
       .addCase(fetchUserProfile.rejected, (state, action) => {
         state.status = 'failed';

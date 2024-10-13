@@ -19,7 +19,7 @@ function Form() {
   // Gestion de la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(login({ email, password, rememberMe }));
   };
 
   // Utilisation d'useEffect pour récupérer le profil utilisateur après la connexion
@@ -39,7 +39,6 @@ function Form() {
     if (authStatus === 'succeeded' && user) {
       // Redirection vers le dashboard après récupération du profil utilisateur
       navigate('/dashboard');
-      dispatch(fetchUserProfile());
     }
   }, [authStatus, user, navigate, dispatch]);
 

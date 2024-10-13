@@ -15,12 +15,11 @@ function Nav() {
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchUserProfile()); 
-    }
-  }, [isAuthenticated, dispatch]);
+    } 
+  }, [isAuthenticated, dispatch, navigate]);
 
   const handleLogout = () => {
     dispatch(logout()); 
-    localStorage.removeItem('token'); 
     navigate("/Sign-In"); 
   };
 

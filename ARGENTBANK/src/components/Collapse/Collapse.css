@@ -1,0 +1,45 @@
+.collapse{
+   width: 100%;
+   max-width: 720px;
+}
+
+.collapse-header{
+   display: flex;
+   justify-content: space-between;
+   background-color: #3d3d3d;
+   color: white;
+   gap: 10px;
+   padding: 25px;
+   border-radius: 8px;
+   margin-top: 10px;
+}
+
+.collapse-content{
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+}
+
+.collapse-content-title{
+   font-size: 1rem;
+}
+
+.collapse-content-amount{
+   font-size: 2rem;
+}
+
+.collapse-content-subtitle{
+   font-size: 0.8rem;
+}
+
+.collapse-chevron i{
+   font-size: 4rem;
+   color: white;
+}
+
+.collapse-chevron{
+   display: flex;
+   align-items: center;
+}
+
+
