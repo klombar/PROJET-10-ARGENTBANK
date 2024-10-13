@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Nav.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,11 +12,14 @@ function Nav() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [profileFetched, setProfileFetched] = useState(false);
+
   useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(fetchUserProfile()); 
+    if (isAuthenticated && !profileFetched) {
+      dispatch(fetchUserProfile());
+      setProfileFetched(true); // Marque le profil comme récupéré
     } 
-  }, [isAuthenticated, dispatch, navigate]);
+  }, [isAuthenticated, profileFetched, dispatch]);
 
   const handleLogout = () => {
     dispatch(logout()); 

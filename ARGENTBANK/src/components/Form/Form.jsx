@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, fetchUserProfile } from '../../redux/authSlice'; // Ajout de la fonction fetchUserProfile
+import { login, fetchUserProfile } from '../../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
+import InputField from '../InputField/inputField';
+import Checkbox from '../Checkbox/Checkbox';
+import SubmitButton from '../SubmitButton/SubmitButton';
 import "./Form.css";
 
 function Form() {
@@ -11,86 +14,54 @@ function Form() {
 
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.auth.status);
-  const authError = useSelector((state) => state.auth.error);
   const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.auth.user); // Récupération des données utilisateur
+  const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
 
-  // Gestion de la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email, password, rememberMe }));
   };
 
-  // Utilisation d'useEffect pour récupérer le profil utilisateur après la connexion
   useEffect(() => {
-    if (authStatus === 'succeeded' && token) {
-      // Si le token est disponible, on peut récupérer le profil utilisateur
+    if (authStatus === 'succeeded' && token && !user) {
       if (rememberMe) {
-        localStorage.setItem('token', token); // Sauvegarde du token dans le localStorage si Remember Me est activé
+        localStorage.setItem('token', token);
       }
-      // Déclenche l'action pour récupérer le profil utilisateur
-      dispatch(fetchUserProfile());
+      if (token) {
+        dispatch(fetchUserProfile());
+      }
     }
   }, [authStatus, token, rememberMe, dispatch]);
 
-  // Gestion de la redirection après connexion réussie
   useEffect(() => {
     if (authStatus === 'succeeded' && user) {
-      // Redirection vers le dashboard après récupération du profil utilisateur
       navigate('/dashboard');
     }
-  }, [authStatus, user, navigate, dispatch]);
+  }, [authStatus, user, navigate]);
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="signIn-Modale-Email-Wrapper">
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="SignIn-Modale-Email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
-      <div className="signIn-Modale-Password-wrapper">
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="signIn-Modale-Password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <div className="signIn-Modale-RememberMe-wrapper">
-        <input
-          type="checkbox"
-          id="signIn-Modale-RememberMe"
-          checked={rememberMe}
-          onChange={(e) => setRememberMe(e.target.checked)}
-        />
-        <label htmlFor="signIn-Modale-RememberMe">Remember Me</label>
-      </div>
-      <div className="signIn-Modale-Submit-Wrapper">
-        <input type="submit" id="signIn-Modale-Submit" value="Sign In" />
-      </div>
-
-      {/* Gestion des états d'authentification */}
-      {authStatus === 'loading' && <p>Loading...</p>}
-      {authStatus === 'failed' && <p>Error: {authError}</p>}
-      {authStatus === 'succeeded' && <p>Connexion réussie !</p>}
-
-      {/* Affichage des données utilisateur */}
-      {user && (
-        <div>
-          <h3>Profil utilisateur :</h3>
-          <pre>{JSON.stringify(user, null, 2)}</pre>
-        </div>
-      )}
+      <InputField
+        label="Email"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+      <InputField
+        label="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <Checkbox
+        label="Remember Me"
+        checked={rememberMe}
+        onChange={(e) => setRememberMe(e.target.checked)}
+      />
+      <SubmitButton value="Sign In" />
     </form>
   );
 }
