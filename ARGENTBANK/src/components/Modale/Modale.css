@@ -1,0 +1,62 @@
+.modale{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   box-sizing: border-box;
+   background-color: white;
+   width: 300px;
+   margin: 0 auto;
+   margin-top: 3rem;
+   padding: 2rem;
+}
+
+input{
+   padding: 5px;
+   font-size: 1.2rem;
+   border: 1px solid black;
+}
+
+.modale i {
+   margin-bottom: 1rem;
+   font-size: 18px;
+}
+
+.modale h1{
+   margin-bottom: 1rem;
+   font-size: 1.5em;
+}
+
+.signIn-Modale-Email-Wrapper label,
+.signIn-Modale-Password-wrapper label{
+   font-weight: bold;
+}
+
+.signIn-Modale-Email-Wrapper,
+.signIn-Modale-Password-wrapper{
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+}
+
+.signIn-Modale-RememberMe-wrapper{
+   display: flex;
+   gap: 5px;
+}
+
+.signIn-Modale-Submit-Wrapper input{
+   text-decoration: underline;
+}
+
+#signIn-Modale-Submit{
+   width: 100%;
+   padding: 8px;
+   font-size: 1.1rem;
+   font-weight: bold;
+   border-color: #00bc77;
+   background-color: #00bc77;
+   color: #fff;
+}
+
+#signIn-Modale-Submit:hover{
+   cursor: pointer;
+}

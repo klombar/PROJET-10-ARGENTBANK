@@ -8,6 +8,7 @@
   "license": "",
   "main": "index.js",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.7",
     "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
@@ -15,7 +16,10 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.21",
+    "react-redux": "^9.1.2",
+    "redux": "^5.0.1",
     "swagger-ui-express": "^4.1.4",
+    "uuid": "^10.0.0",
     "yamljs": "^0.3.0"
   },
   "scripts": {
@@ -24,6 +28,9 @@
     "server": "node ./server/server.js"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "autoprefixer": "^10.4.20",
+    "nodemon": "^2.0.4",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13"
   }
 }

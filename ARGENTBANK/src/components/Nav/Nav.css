@@ -1,0 +1,54 @@
+.header-nav{
+   display: flex;
+   align-items: center;
+   gap: 5px;
+   font-weight: bold;
+   margin-right: 0.5rem;
+}
+
+.header-nav-connected{
+   display: flex;
+   align-items: center;
+   gap: 30px;
+   font-weight: bold;
+   margin-right: 0.5rem;
+}
+
+.header-nav-link{
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   font-weight: bold;
+}
+
+.header-nav p:hover{
+   cursor: pointer;
+   text-decoration: underline;
+}
+
+.fa-gear,
+.fa-power-off{
+   font-size: 2rem;
+   color: #71b20d;
+   cursor: pointer;
+}
+
+.icon-default {
+   color: black;
+   font-size: 2rem;
+ }
+ 
+ .icon-authenticated {
+   color: #71b20d;
+   font-size: 2rem;
+ }
+
+ .connected-user-color{
+   color: #71b20d;
+   font-weight: normal;
+ }
+
+ .no-connected-user-color{
+   color: black;
+ }
+
