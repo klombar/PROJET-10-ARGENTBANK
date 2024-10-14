@@ -7,7 +7,7 @@ function SignIn() {
       <>
       <Main>
          <div className="main-signin-background">
-            <Modale />
+            <Modale/>
          </div>
       </Main>
       </>

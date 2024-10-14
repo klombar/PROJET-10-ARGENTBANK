@@ -4,3 +4,47 @@
    justify-content: center;
    flex-direction: column;
 }
+
+.dashBoard-form{
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   width: 21%;
+}
+
+.dashBoard-form h1{
+   text-align: center;
+   font-weight: normal;
+   margin-bottom: 10px;
+}
+
+.dashBoard-inputField-wrapper{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+}
+
+.dashBoard-inputField-wrapper label{
+   font-size: 0.9rem;
+}
+
+.dashBoard-inputField-wrapper input{
+   max-width: 120px;
+   border-color: lightgrey;
+   border-radius: 5px;
+}
+
+.dashBoard-submitButton-wrapper{
+   display: flex;
+   flex-direction: row;
+   gap: 5px;
+}
+
+#signIn-Modale-Submit{
+   border-radius: 3px;
+   font-size: 1rem;
+   margin: 15px 0px;
+}
+

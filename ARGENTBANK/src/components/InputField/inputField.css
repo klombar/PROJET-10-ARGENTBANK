@@ -4,11 +4,11 @@ input{
    border: 1px solid black;
 }
 
-.signIn-Modale-Wrapper label{
+.inputField-wrapper label{
    font-weight: bold;
 }
 
-.signIn-Modale-Wrapper{
+.inputField-wrapper{
    display: flex;
    justify-content: center;
    flex-direction: column;

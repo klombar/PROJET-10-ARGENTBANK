@@ -33,7 +33,9 @@ function Nav() {
       ) : (
         <div className={isAuthenticated ? "header-nav-connected" : "header-nav"}>
         <Link to={isAuthenticated ? "/profile" : "/Sign-In"} className="header-nav-link">
-          <p className={`${isAuthenticated ? "connected-user-color" : "no-connected-user-color"}`}>{isAuthenticated ? `${userFirstName}_${userLastName}` : "Sign In"}</p> {/* Affiche le nom & prénom de l'utilisateur */}
+          <p className={`${isAuthenticated ? "connected-user-color" : "no-connected-user-color"}`}>
+            {isAuthenticated ? `${userFirstName}_${userLastName}` : "Sign In"}
+            </p> {/* Affiche le nom & prénom de l'utilisateur */}
           <i className={`fa-solid fa-user-circle ${isAuthenticated ? "icon-authenticated" : "icon-default"}`}></i>
         </Link>
         <i className={isAuthenticated ? "fa-solid fa-gear" : ""}></i>

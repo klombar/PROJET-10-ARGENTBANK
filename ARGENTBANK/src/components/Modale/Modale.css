@@ -20,6 +20,21 @@
    font-size: 1.5em;
 }
 
+.modal-form{
+   display: flex;
+   flex-direction: column;
+   gap: 1.1rem;
+   width: 100%;
+}
+
+.signIn-inputField{
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+}
+
+
+
 
 
 
