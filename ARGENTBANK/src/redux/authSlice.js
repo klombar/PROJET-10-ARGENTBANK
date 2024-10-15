@@ -78,13 +78,18 @@ const authSlice = createSlice({
     token: localStorage.getItem('token'), // Charge le token au démarrage
     status: 'idle',
     error: null,
+    userName: '',
   },
   reducers: {
+    setUserName: (state, action) => {
+      state.userName = action.payload; 
+    },
     logout: (state) => {
       state.user = null;
       state.token = null; // Réinitialise le token dans le state
       localStorage.removeItem('token'); // Supprime le token du localStorage
       state.status = 'idle';
+      state.userName = '';
     },
   },
   extraReducers: (builder) => {
@@ -100,6 +105,7 @@ const authSlice = createSlice({
         state.status = 'succeeded';
         state.token = action.payload.token; // Assigne le token à l'état
         // Note : Le stockage du token dans le localStorage se fait dans l'action login
+        state.userName = action.payload.userName || '';
       })
       .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
@@ -119,5 +125,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setUserName } = authSlice.actions;
 export default authSlice.reducer;
