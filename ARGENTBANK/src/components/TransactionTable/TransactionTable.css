@@ -1,0 +1,38 @@
+table{
+   border-collapse: separate; /* Utilise 'separate' pour permettre l'espacement */
+   border-spacing: 0 10px; /* Espace de 5px entre les lignes */
+}
+
+thead tr{
+   background-color: white;
+   color: black;
+}
+
+thead tr th{
+   padding: 7px;
+   font-weight: 400;
+}
+
+tr{
+   border-radius: 5px;
+}
+
+td{
+   text-align: center;
+   padding: 7px;
+   background-color: #61b37b;
+   border: none;
+   color: white;
+}
+
+.align-left{
+   text-align: left;
+}
+
+.left-radius{
+   border-radius: 5px 0 0 5px;
+}
+
+.right-radius{
+   border-radius: 0 5px 5px 0;
+}

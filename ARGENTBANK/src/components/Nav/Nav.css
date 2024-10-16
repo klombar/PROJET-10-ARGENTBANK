@@ -29,7 +29,7 @@
 .fa-gear,
 .fa-power-off{
    font-size: 2rem;
-   color: #00bc77;
+   color: #61b37b;
    cursor: pointer;
 }
 
@@ -39,12 +39,12 @@
  }
  
  .icon-authenticated {
-   color: #00bc77;
+   color: #61b37b;
    font-size: 2rem;
  }
 
  .connected-user-color{
-   color: #00bc77;
+   color: #61b37b;
    font-weight: normal;
  }
 

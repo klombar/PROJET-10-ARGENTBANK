@@ -1,6 +1,7 @@
 import "./Dashboard.css";
 import Main from "../../Layout/Main/Main";
 import Collapse from "../../components/Collapse/Collapse";
+import TransactionTable from "../../components/TransactionTable/TransactionTable"; // Import du nouveau composant
 import InputField from "../../components/InputField/inputField";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import { setUserName } from "../../redux/authSlice";
@@ -16,7 +17,7 @@ function Dashboard() {
   const dispatch = useDispatch();
 
   const [profileFetched, setProfileFetched] = useState(false);
-  const [localUserName, setLocalUserName] = useState(`${userFirstName}_${userLastName}`); // État local
+  const [localUserName, setLocalUserName] = useState(`${userFirstName}_${userLastName}`);
 
   useEffect(() => {
     if (isAuthenticated && !profileFetched) {
@@ -27,17 +28,17 @@ function Dashboard() {
 
   useEffect(() => {
     if (isAuthenticated && userFirstName && userLastName) {
-      setLocalUserName(`${userFirstName}_${userLastName}`); // Met à jour si nécessaire
+      setLocalUserName(`${userFirstName}_${userLastName}`);
     }
   }, [isAuthenticated, userFirstName, userLastName]);
 
   const handleUserNameChange = (e) => {
-    setLocalUserName(e.target.value); // Met à jour l'état local pour localUserName
+    setLocalUserName(e.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(setUserName(localUserName)); // Envoie l'état localUserName à Redux
+    dispatch(setUserName(localUserName));
   };
 
   return (
@@ -50,7 +51,7 @@ function Dashboard() {
             type="text" 
             label="User Name :" 
             name="User Name" 
-            value={localUserName} // Utilise localUserName
+            value={localUserName}
             onChange={handleUserNameChange}
           />
           <InputField
@@ -59,7 +60,6 @@ function Dashboard() {
             label="First Name :" 
             name="First Name" 
             value={isAuthenticated ? `${userFirstName}` : " "}
-            onChange={handleUserNameChange}
             disabled
           />
           <InputField 
@@ -68,7 +68,6 @@ function Dashboard() {
             label="Last Name :" 
             name="Last Name" 
             value={isAuthenticated ? `${userLastName}` : " "}
-            onChange={handleUserNameChange}
             disabled
           />
           <div className="dashBoard-submitButton-wrapper">
@@ -76,9 +75,19 @@ function Dashboard() {
             <SubmitButton value="Cancel"/>
           </div>
         </form>
-        <Collapse title={"Argent Bank Checking (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}/>
-        <Collapse title={"Argent Bank Checking (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}/>
-        <Collapse title={"Argent Bank Checking (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}/>
+
+        <Collapse title={"Argent Bank Checking (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
+          <TransactionTable />
+        </Collapse>
+
+        <Collapse title={"Argent Bank Savings (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
+          <TransactionTable />
+        </Collapse>
+
+        <Collapse title={"Argent Bank Business (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
+          <TransactionTable />
+        </Collapse>
+
       </Main>
     </>
   );
