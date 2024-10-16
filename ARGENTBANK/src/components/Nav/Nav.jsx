@@ -35,7 +35,7 @@ function Nav() {
         <p>Loading...</p>  
       ) : (
         <div className={isAuthenticated ? "header-nav-connected" : "header-nav"}>
-          <Link to={isAuthenticated ? "/profile" : "/Sign-In"} className="header-nav-link">
+          <Link to={isAuthenticated ? "/dashboard" : "/Sign-In"} className="header-nav-link">
             <p className={`${isAuthenticated ? "connected-user-color" : "no-connected-user-color"}`}>
               {displayUserName} {/* Utilise displayUserName pour l'affichage */}
             </p> 
