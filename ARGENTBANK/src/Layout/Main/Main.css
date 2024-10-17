@@ -1,3 +1,8 @@
 .section-features{
    display: flex;
 }
+
+.main{   
+   background-color: #12002b;
+   width: 100%;
+}

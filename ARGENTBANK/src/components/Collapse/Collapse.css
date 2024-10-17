@@ -6,12 +6,11 @@
 .collapse-header{
    display: flex;
    justify-content: space-between;
-   background-color: #3d3d3d;
+   background-color: white;
    color: white;
    gap: 10px;
    padding: 15px;
-   border-radius: 8px;
-   margin-top: 10px;
+   margin-top: 25px;
 }
 
 .collapse-content{
@@ -22,19 +21,22 @@
 
 .collapse-content-title{
    font-size: 1rem;
+   color: black;
 }
 
 .collapse-content-amount{
    font-size: 2rem;
+   color: black;
 }
 
 .collapse-content-subtitle{
    font-size: 0.8rem;
+   color: black;
 }
 
 .collapse-chevron i{
    font-size: 4rem;
-   color: white;
+   color: black;
 }
 
 .collapse-chevron{

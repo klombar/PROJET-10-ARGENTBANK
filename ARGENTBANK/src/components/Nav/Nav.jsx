@@ -9,7 +9,7 @@ function Nav() {
   const userFirstName = useSelector((state) => state.auth.user?.firstName); 
   const userLastName = useSelector((state) => state.auth.user?.lastName);
   const authStatus = useSelector((state) => state.auth.status); 
-  const userName = useSelector((state) => state.auth.userName); // Récupérez userName
+  const userName = useSelector((state) => state.auth.userName); // Récupere userName
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ function Nav() {
         <div className={isAuthenticated ? "header-nav-connected" : "header-nav"}>
           <Link to={isAuthenticated ? "/dashboard" : "/Sign-In"} className="header-nav-link">
             <p className={`${isAuthenticated ? "connected-user-color" : "no-connected-user-color"}`}>
-              {displayUserName} {/* Utilise displayUserName pour l'affichage */}
+              {displayUserName}
             </p> 
             <i className={`fa-solid fa-user-circle ${isAuthenticated ? "icon-authenticated" : "icon-default"}`}></i>
           </Link>

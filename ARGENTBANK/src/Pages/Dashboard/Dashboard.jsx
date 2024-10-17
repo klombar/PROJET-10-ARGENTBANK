@@ -1,9 +1,11 @@
 import "./Dashboard.css";
+import "../../components/Button/Button.css"
 import Main from "../../Layout/Main/Main";
+import "../../Layout/Main/Main.css";
 import Collapse from "../../components/Collapse/Collapse";
-import TransactionTable from "../../components/TransactionTable/TransactionTable"; // Import du nouveau composant
+import TransactionTable from "../../components/TransactionTable/TransactionTable";
 import InputField from "../../components/InputField/inputField";
-import SubmitButton from "../../components/SubmitButton/SubmitButton";
+import Button from "../../components/Button/Button"; // Import du nouveau composant Button
 import { setUserName } from "../../redux/authSlice";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,6 +20,7 @@ function Dashboard() {
 
   const [profileFetched, setProfileFetched] = useState(false);
   const [localUserName, setLocalUserName] = useState(`${userFirstName}_${userLastName}`);
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated && !profileFetched) {
@@ -39,42 +42,58 @@ function Dashboard() {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(setUserName(localUserName));
+    setIsFormVisible(false);
+  };
+
+  const toggleFormVisibility = () => {
+    setIsFormVisible(!isFormVisible);
   };
 
   return (
     <>
       <Main>
-        <form className="dashBoard-form" onSubmit={handleSubmit}>
-          <h1>Edit User Info</h1>
-          <InputField 
-            className="dashBoard-inputField-wrapper" 
-            type="text" 
-            label="User Name :" 
-            name="User Name" 
-            value={localUserName}
-            onChange={handleUserNameChange}
-          />
-          <InputField
-            className="dashBoard-inputField-wrapper" 
-            type="text" 
-            label="First Name :" 
-            name="First Name" 
-            value={isAuthenticated ? `${userFirstName}` : " "}
-            disabled
-          />
-          <InputField 
-            className="dashBoard-inputField-wrapper" 
-            type="text" 
-            label="Last Name :" 
-            name="Last Name" 
-            value={isAuthenticated ? `${userLastName}` : " "}
-            disabled
-          />
-          <div className="dashBoard-submitButton-wrapper">
-            <SubmitButton value="Save" type="submit"/>
-            <SubmitButton value="Cancel"/>
+        {!isFormVisible && (
+          <div className="dashBoard-header">
+          <h1>Welcome Back <br />{userFirstName} {userLastName} !</h1>
+          <Button value="Edit Name" onClick={toggleFormVisibility} className={"open-Edit-User-button"}/>
           </div>
-        </form>
+        )}
+
+        {isFormVisible && (
+          <form className="dashBoard-form" onSubmit={handleSubmit}>
+            <h1>Edit User Info</h1>
+            <InputField 
+              className="dashBoard-inputField-wrapper" 
+              type="text" 
+              label="User Name :" 
+              name="User Name" 
+              value={localUserName}
+              onChange={handleUserNameChange}
+            />
+            <InputField
+              className="dashBoard-inputField-wrapper" 
+              type="text" 
+              label="First Name :" 
+              name="First Name" 
+              value={isAuthenticated ? `${userFirstName}` : " "}
+              onChange={handleUserNameChange}
+              disabled
+            />
+            <InputField 
+              className="dashBoard-inputField-wrapper" 
+              type="text" 
+              label="Last Name :" 
+              name="Last Name" 
+              value={isAuthenticated ? `${userLastName}` : " "}
+              onChange={handleUserNameChange}
+              disabled
+            />
+            <div className="dashBoard-submitButton-wrapper">
+              <Button value="Save" onClick={handleSubmit} className={"signIn-Modale-Submit"}/>
+              <Button value="Cancel" onClick={toggleFormVisibility} className={"signIn-Modale-Submit"}/>
+            </div>
+          </form>
+        )}
 
         <Collapse title={"Argent Bank Checking (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
           <TransactionTable />
@@ -87,7 +106,6 @@ function Dashboard() {
         <Collapse title={"Argent Bank Business (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
           <TransactionTable />
         </Collapse>
-
       </Main>
     </>
   );

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Form from "../Form/Form";
 import InputField from '../InputField/inputField';
 import Checkbox from '../Checkbox/Checkbox';
-import SubmitButton from '../SubmitButton/SubmitButton';
+import Button from '../Button/Button';
 import "./Modale.css";
 
 function Modale() {
@@ -67,7 +67,7 @@ function Modale() {
           checked={rememberMe}
           onChange={(e) => setRememberMe(e.target.checked)}
         />
-        <SubmitButton value="Sign In" />
+        <Button value="Sign In" onClick={handleSubmit} className={"signIn-Modale-Submit"}/>
       </Form>
     </div>
   );
