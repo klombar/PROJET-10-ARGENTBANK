@@ -8,6 +8,7 @@ import InputField from "../../components/InputField/inputField";
 import Button from "../../components/Button/Button"; // Import du nouveau composant Button
 import { setUserName } from "../../redux/authSlice";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserProfile } from "../../redux/authSlice"; 
 import PropTypes from 'prop-types';
@@ -17,10 +18,18 @@ function Dashboard() {
   const userFirstName = useSelector((state) => state.auth.user?.firstName); 
   const userLastName = useSelector((state) => state.auth.user?.lastName);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [profileFetched, setProfileFetched] = useState(false);
   const [localUserName, setLocalUserName] = useState(`${userFirstName}_${userLastName}`);
   const [isFormVisible, setIsFormVisible] = useState(false);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      // Si l'utilisateur n'est pas authentifié, redirige vers la page d'accueil
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     if (isAuthenticated && !profileFetched) {
@@ -51,7 +60,7 @@ function Dashboard() {
 
   return (
     <>
-      <Main>
+      <Main className={"Main"}>
         {!isFormVisible && (
           <div className="dashBoard-header">
           <h1>Welcome Back <br />{userFirstName} {userLastName} !</h1>

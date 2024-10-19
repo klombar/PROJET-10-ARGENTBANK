@@ -9,9 +9,15 @@
 .header-nav-connected{
    display: flex;
    align-items: center;
-   gap: 30px;
    font-weight: bold;
    margin-right: 0.5rem;
+   gap: 12px;
+}
+
+.nav-logout{
+   display: flex;
+   gap: 5px;
+   cursor: pointer;
 }
 
 .header-nav-link{
@@ -29,23 +35,16 @@
 .fa-gear,
 .fa-power-off{
    font-size: 2rem;
-   color: #61b37b;
+   color: #00bc77;
    cursor: pointer;
 }
 
 .icon-default {
    color: black;
-   font-size: 2rem;
- }
- 
- .icon-authenticated {
-   color: #61b37b;
-   font-size: 2rem;
  }
 
  .connected-user-color{
-   color: #61b37b;
-   font-weight: normal;
+   font-weight: bold;
  }
 
  .no-connected-user-color{

@@ -1,6 +1,7 @@
 table{
-   border-collapse: separate; /* Utilise 'separate' pour permettre l'espacement */
-   border-spacing: 0 10px; /* Espace de 5px entre les lignes */
+   border-collapse: separate; 
+   border-spacing: 0 10px; 
+   width: 100%;
 }
 
 thead tr{
@@ -20,7 +21,7 @@ tr{
 td{
    text-align: center;
    padding: 7px;
-   background-color: #61b37b;
+   background-color: #00bc77;
    border: none;
    color: white;
 }

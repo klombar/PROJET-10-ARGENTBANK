@@ -33,6 +33,11 @@
    gap: 0.5rem;
 }
 
+.signIn-inputField label{
+   text-align: left;
+   font-weight: bold;
+}
+
 
 
 

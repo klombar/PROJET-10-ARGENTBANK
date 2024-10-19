@@ -9,7 +9,7 @@ function Nav() {
   const userFirstName = useSelector((state) => state.auth.user?.firstName); 
   const userLastName = useSelector((state) => state.auth.user?.lastName);
   const authStatus = useSelector((state) => state.auth.status); 
-  const userName = useSelector((state) => state.auth.userName); // Récupere userName
+  const userName = useSelector((state) => state.auth.userName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ function Nav() {
 
   const handleLogout = () => {
     dispatch(logout()); 
-    navigate("/Sign-In"); 
+    navigate("/"); 
   };
 
   // Définit le nom d'utilisateur à afficher
@@ -35,14 +35,18 @@ function Nav() {
         <p>Loading...</p>  
       ) : (
         <div className={isAuthenticated ? "header-nav-connected" : "header-nav"}>
-          <Link to={isAuthenticated ? "/dashboard" : "/Sign-In"} className="header-nav-link">
+          <Link to={isAuthenticated ? "/dashboard" : "/sign-in"} className="header-nav-link">
+            <i className={`fa-solid fa-user-circle ${isAuthenticated ? "icon-authenticated" : "icon-default"}`}></i>
             <p className={`${isAuthenticated ? "connected-user-color" : "no-connected-user-color"}`}>
               {displayUserName}
             </p> 
-            <i className={`fa-solid fa-user-circle ${isAuthenticated ? "icon-authenticated" : "icon-default"}`}></i>
-          </Link>
-          <i className={isAuthenticated ? "fa-solid fa-gear" : ""}></i>
-          <i onClick={handleLogout} className={isAuthenticated ? "fa-solid fa-power-off" : ""}></i>
+          </Link> 
+          {isAuthenticated && (
+            <p onClick={handleLogout} className="nav-logout">
+              <i className="fa fa-sign-out"></i>
+              Sign Out
+            </p>
+          )}
         </div>
       )}
     </>

@@ -2,7 +2,7 @@
    display: flex;
 }
 
-.main{   
+.Main{   
    background-color: #12002b;
-   width: 100%;
+   flex: 1;
 }

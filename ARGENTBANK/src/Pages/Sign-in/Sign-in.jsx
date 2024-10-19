@@ -5,10 +5,8 @@ import Main from "../../Layout/Main/Main"
 function SignIn() {
    return(
       <>
-      <Main>
-         <div className="main-signin-background">
+      <Main className={"Main"}>
             <Modale/>
-         </div>
       </Main>
       </>
    )
