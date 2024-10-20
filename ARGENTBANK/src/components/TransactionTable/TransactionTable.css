@@ -1,7 +1,7 @@
 table{
-   border-collapse: separate; 
-   border-spacing: 0 10px; 
    width: 100%;
+   margin: 0 auto;
+   border-collapse: collapse;
 }
 
 thead tr{
@@ -9,31 +9,29 @@ thead tr{
    color: black;
 }
 
-thead tr th{
+thead{
    padding: 7px;
    font-weight: 400;
+   text-align: left;
 }
 
-tr{
-   border-radius: 5px;
+.date{
+   text-align: left;
+}
+
+th{
+   width: 112px;
+   padding: 12px;
+   text-align: center;
 }
 
 td{
    text-align: center;
    padding: 7px;
    background-color: #00bc77;
-   border: none;
    color: white;
 }
 
 .align-left{
    text-align: left;
-}
-
-.left-radius{
-   border-radius: 5px 0 0 5px;
-}
-
-.right-radius{
-   border-radius: 0 5px 5px 0;
 }

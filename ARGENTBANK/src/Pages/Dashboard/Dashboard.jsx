@@ -104,15 +104,15 @@ function Dashboard() {
           </form>
         )}
 
-        <Collapse title={"Argent Bank Checking (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
+        <Collapse className={"align-left"} title={"Argent Bank Checking (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
           <TransactionTable />
         </Collapse>
 
-        <Collapse title={"Argent Bank Savings (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
+        <Collapse className={"align-left"} title={"Argent Bank Savings (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
           <TransactionTable />
         </Collapse>
 
-        <Collapse title={"Argent Bank Business (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
+        <Collapse className={"align-left"} title={"Argent Bank Business (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
           <TransactionTable />
         </Collapse>
       </Main>

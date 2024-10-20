@@ -11,7 +11,7 @@
    align-items: center;
    font-weight: bold;
    margin-right: 0.5rem;
-   gap: 12px;
+   gap: 20px;
 }
 
 .nav-logout{
@@ -23,7 +23,7 @@
 .header-nav-link{
    display: flex;
    align-items: center;
-   gap: 10px;
+   gap: 5px;
    font-weight: bold;
 }
 

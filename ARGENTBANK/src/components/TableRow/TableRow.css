@@ -1,0 +1,30 @@
+.fa-pencil{
+   font-size: small;
+   color: #fff;
+   cursor: pointer;
+   margin-left: 5px;
+}
+
+.left{
+   text-align: left;
+   padding-left: 42px;
+}
+
+.left-information{
+   text-align: left;
+}
+
+.tableRowSpace{
+   padding: 5px;
+}
+
+.tableRow-transactions{
+   font-weight: 700;
+   text-align: center;
+}
+
+.tableRow-transactions-date{
+   font-weight: 700;
+   text-align: left;
+
+}
