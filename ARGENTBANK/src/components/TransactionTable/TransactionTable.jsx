@@ -21,7 +21,7 @@ function TransactionTable() {
       <thead>
         <tr>
           <th className='date'>Date</th>
-          <th>Description</th>
+          <th className='description'>Description</th>
           <th>Amount</th>
           <th>Balance</th>
           <th></th>

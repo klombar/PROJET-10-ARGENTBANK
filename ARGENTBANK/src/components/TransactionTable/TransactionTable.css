@@ -15,7 +15,8 @@ thead{
    text-align: left;
 }
 
-.date{
+.date,
+.description{
    text-align: left;
 }
 
