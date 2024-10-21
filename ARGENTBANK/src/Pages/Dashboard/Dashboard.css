@@ -20,8 +20,9 @@
 .dashBoard-form{
    display: flex;
    flex-direction: column;
+   align-items: center;
    gap: 10px;
-   width: 21%;
+   width: 100%;
    margin: 20px 0px;
 }
 
@@ -54,6 +55,10 @@
 .dashBoard-submitButton-wrapper{
    display: flex;
    flex-direction: row;
+   justify-content: center;
    gap: 5px;
+   width: 40%;
+   max-width: 225px;
+   min-width: 225px;
 }
 

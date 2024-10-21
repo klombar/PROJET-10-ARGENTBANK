@@ -5,4 +5,5 @@
 .Main{   
    background-color: #12002b;
    flex: 1;
+   padding: 0 20px;
 }

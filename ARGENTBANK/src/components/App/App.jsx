@@ -6,6 +6,7 @@ import Header from "../../Layout/Header/Header";
 import Footer from "../../Layout/Footer/Footer";
 import SignIn from "../../Pages/Sign-in/Sign-in";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
+import Error404 from "../../Pages/Error404/Error404";
 import "./App.css"; 
 
 function App() {
@@ -13,7 +14,6 @@ function App() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    // Si le token est absent, redirige vers la page d'accueil
     if (!token) {
       <Navigate to="/" />;
     }
@@ -26,6 +26,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
       </>

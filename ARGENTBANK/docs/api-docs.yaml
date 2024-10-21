@@ -1,0 +1,162 @@
+openapi: 3.0.0
+info:
+  title: API des Transactions
+  version: 1.0.0
+  description: API pour gérer les transactions des utilisateurs.
+servers:
+  - url: localhost:3001/api/v1
+paths:
+  /transactions:
+    get:
+      summary: Récupérer toutes les transactions du mois en cours, groupées par compte
+      description: Retourne les transactions pour le mois en cours, regroupées par compte.
+      parameters:
+        - name: accountId
+          in: query
+          required: true
+          description: ID du compte pour lequel récupérer les transactions.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Liste des transactions récupérées avec succès.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        date:
+                          type: string
+                          format: date
+                        description:
+                          type: string
+                        amount:
+                          type: string
+                        balance:
+                          type: string
+        '404':
+          description: Aucun compte trouvé avec l'ID spécifié.
+        
+    post:
+      summary: Ajouter une nouvelle transaction
+      description: Crée une nouvelle transaction pour un compte spécifié.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountId:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                description:
+                  type: string
+                amount:
+                  type: string
+      responses:
+        '201':
+          description: Transaction créée avec succès.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+        '400':
+          description: Requête invalide. Vérifiez les paramètres fournis.
+
+  /transactions/{id}:
+    get:
+      summary: Récupérer les détails d'une transaction spécifique
+      description: Retourne les détails d'une transaction donnée par son ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la transaction à récupérer.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Détails de la transaction récupérés avec succès.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  date:
+                    type: string
+                    format: date
+                  description:
+                    type: string
+                  amount:
+                    type: string
+                  balance:
+                    type: string
+        '404':
+          description: Transaction non trouvée avec l'ID spécifié.
+
+    put:
+      summary: Modifier une transaction existante
+      description: Met à jour les informations d'une transaction donnée par son ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la transaction à mettre à jour.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                amount:
+                  type: string
+      responses:
+        '200':
+          description: Transaction mise à jour avec succès.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+        '404':
+          description: Transaction non trouvée avec l'ID spécifié.
+        '400':
+          description: Requête invalide. Vérifiez les paramètres fournis.
+
+    delete:
+      summary: Supprimer une transaction
+      description: Supprime une transaction donnée par son ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID de la transaction à supprimer.
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Transaction supprimée avec succès.
+        '404':
+          description: Transaction non trouvée avec l'ID spécifié.

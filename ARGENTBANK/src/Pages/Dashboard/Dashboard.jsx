@@ -5,7 +5,7 @@ import "../../Layout/Main/Main.css";
 import Collapse from "../../components/Collapse/Collapse";
 import TransactionTable from "../../components/TransactionTable/TransactionTable";
 import InputField from "../../components/InputField/inputField";
-import Button from "../../components/Button/Button"; // Import du nouveau composant Button
+import Button from "../../components/Button/Button"; 
 import { setUserName } from "../../redux/authSlice";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +26,6 @@ function Dashboard() {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      // Si l'utilisateur n'est pas authentifié, redirige vers la page d'accueil
       navigate("/");
     }
   }, [isAuthenticated, navigate]);
@@ -104,15 +103,15 @@ function Dashboard() {
           </form>
         )}
 
-        <Collapse className={"align-left"} title={"Argent Bank Checking (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
+        <Collapse className={"align-left"} title={"Argent Bank Checking (x8349)"} amount={"$2,082.79"} subtitle={"Available Balance"}>
           <TransactionTable />
         </Collapse>
 
-        <Collapse className={"align-left"} title={"Argent Bank Savings (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
+        <Collapse className={"align-left"} title={"Argent Bank Savings (x6712)"} amount={"$10,928.42"} subtitle={"Available Balance"}>
           <TransactionTable />
         </Collapse>
 
-        <Collapse className={"align-left"} title={"Argent Bank Business (x3448)"} amount={"$48,098.43"} subtitle={"Available balance"}>
+        <Collapse className={"align-left"} title={"Argent Bank Credit Card (x8349)"} amount={"$184.30"} subtitle={"Current Balance"}>
           <TransactionTable />
         </Collapse>
       </Main>

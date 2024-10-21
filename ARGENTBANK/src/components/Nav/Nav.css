@@ -12,6 +12,11 @@
    font-weight: bold;
    margin-right: 0.5rem;
    gap: 20px;
+   @media screen and (max-width: 500px){
+   justify-content: center;
+   margin-bottom: 15px; 
+   width: 100%;  
+   }
 }
 
 .nav-logout{
@@ -25,6 +30,9 @@
    align-items: center;
    gap: 5px;
    font-weight: bold;
+   @media screen and (max-width: 500px){
+   margin-bottom: 10px;
+   }
 }
 
 .header-nav p:hover{
@@ -51,3 +59,5 @@
    color: black;
  }
 
+
+ 

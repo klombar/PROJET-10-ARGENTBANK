@@ -20,15 +20,14 @@
    padding: 2rem;
    background-color: #fff;
    @media screen and (max-width: 500px){
-      top: 90px;
-      right: -20px;
+      top: 110px;
+      right: -10px;
       width: 150px;
    }
    @media screen and (min-width:501px) and (max-width: 768px){
       top: 90px;
       right: 0px;
       width: 200px;
-      
    }
 }
 

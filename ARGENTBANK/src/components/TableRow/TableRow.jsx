@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import TableCell from '../TableCell/TableCell'; 
+import TableCell from '../TableCell/TableCell';
 import PropTypes from 'prop-types';
+import Dropdown from '../Dropdown/Dropdown'; 
 import './TableRow.css';
 
 function TableRow({ transaction }) {
@@ -10,38 +11,47 @@ function TableRow({ transaction }) {
     setIsOpen(!isOpen);
   };
 
+  const dropdownOptions = ["Edit", "Delete"]; 
+
   return (
-   <>
+    <>
       <div className='tableRowSpace'></div>
       <tr>
         <TableCell className={"tableRow-transactions-date"}>{transaction.date}</TableCell>
         <TableCell className={"tableRow-transactions-description"}>{transaction.description}</TableCell>
         <TableCell className={"tableRow-transactions"}>{transaction.amount}</TableCell>
         <TableCell className={"tableRow-transactions"}>{transaction.balance}</TableCell>
-        <TableCell className={"tableRow-transactions"}>
-          <i onClick={toggleCollapse} className="fa-solid fa-chevron-down"></i>
+        <TableCell className={"tableRow-transactions-chevron"}>
+          <i 
+            onClick={toggleCollapse} 
+            className={`fa-solid ${isOpen ? 'fa-xmark' : 'fa-chevron-down'}`}
+          ></i>
         </TableCell>
       </tr>
       {isOpen && (
-            <>
-            <tr>
-               <TableCell colSpan="1" className={"left-information"}> Transaction Type</TableCell>
-               <TableCell colSpan="1" className={"left"}> Electronic</TableCell>
-               <TableCell colSpan="3" ></TableCell>
-            </tr>
-            <tr>
-               <TableCell colSpan="1" className={"left-information"}>Category</TableCell>
-               <TableCell colSpan="1" className={"left"}>Food <i className="fa-solid fa-pencil"></i></TableCell>
-               <TableCell colSpan="3" ></TableCell>
-            </tr>
-            <tr>
-               <TableCell colSpan="1" className={"left-information"}>Note</TableCell>
-               <TableCell colSpan="1" className={"left"}>Lorem ipsum <i className="fa-solid fa-pencil"></i></TableCell>
-               <TableCell colSpan="3" ></TableCell>
-            </tr>
-         </>
+        <>
+          <tr>
+            <TableCell colSpan="1" className={"left-information"}>Transaction Type</TableCell>
+            <TableCell colSpan="1" className={"left"}>Electronic</TableCell>
+            <TableCell colSpan="3"></TableCell>
+          </tr>
+          <tr>
+            <TableCell colSpan="1" className={"left-information"}>Category</TableCell>
+            <TableCell colSpan="1" className={"left"}>
+              Food <Dropdown options={dropdownOptions} />
+            </TableCell>
+            <TableCell colSpan="3"></TableCell>
+          </tr>
+          <tr>
+            <TableCell colSpan="1" className={"left-information"}>Note</TableCell>
+            <TableCell colSpan="1" className={"left"}>
+              Lorem ipsum <Dropdown options={dropdownOptions} />
+            </TableCell>
+            <TableCell colSpan="3"></TableCell>
+          </tr>
+        </>
       )}
-   </>
+    </>
   );
 }
 

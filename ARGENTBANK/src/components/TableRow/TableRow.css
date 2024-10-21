@@ -26,5 +26,8 @@
 .tableRow-transactions-description{
    font-weight: 700;
    text-align: left;
+}
 
+.tableRow-transactions-chevron{
+   text-align: end;
 }
