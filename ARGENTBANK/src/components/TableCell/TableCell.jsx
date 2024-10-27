@@ -6,7 +6,7 @@ const TableCell = ({ className,colSpan, children }) => {
 
 TableCell.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   colSpan: PropTypes.string,
 };
 

@@ -17,6 +17,7 @@ function Modale() {
   const authStatus = useSelector((state) => state.auth.status);
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+  const error = useSelector((state) => state.auth.error);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -45,6 +46,7 @@ function Modale() {
     <div className="modale">
       <i className="fa fa-user-circle"></i>
       <h1>Sign In</h1>
+      {error && <p className="error">{error}</p>}
       <Form handleSubmit={handleSubmit} className="modal-form">
         <InputField
           className="signIn-inputField"

@@ -4,17 +4,17 @@ info:
   version: 1.0.0
   description: API pour gérer les transactions des utilisateurs.
 servers:
-  - url: localhost:3001/api/v1
+  - url: http://localhost:3001/api/v1
 paths:
   /transactions:
     get:
-      summary: Récupérer toutes les transactions du mois en cours, groupées par compte
-      description: Retourne les transactions pour le mois en cours, regroupées par compte.
+      summary: Récupérer toutes les transactions pour le mois en cours
+      description: Retourne les transactions de l'utilisateur pour le mois en cours, groupées par compte.
       parameters:
-        - name: accountId
+        - name: userId
           in: query
           required: true
-          description: ID du compte pour lequel récupérer les transactions.
+          description: ID de l'utilisateur pour lequel récupérer les transactions.
           schema:
             type: string
       responses:
@@ -42,39 +42,7 @@ paths:
                         balance:
                           type: string
         '404':
-          description: Aucun compte trouvé avec l'ID spécifié.
-        
-    post:
-      summary: Ajouter une nouvelle transaction
-      description: Crée une nouvelle transaction pour un compte spécifié.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                accountId:
-                  type: string
-                date:
-                  type: string
-                  format: date
-                description:
-                  type: string
-                amount:
-                  type: string
-      responses:
-        '201':
-          description: Transaction créée avec succès.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-        '400':
-          description: Requête invalide. Vérifiez les paramètres fournis.
+          description: Aucun utilisateur trouvé avec l'ID spécifié.
 
   /transactions/{id}:
     get:
@@ -147,7 +115,7 @@ paths:
 
     delete:
       summary: Supprimer une transaction
-      description: Supprime une transaction donnée par son ID.
+      description: Supprime une transaction donnée par son ID. (Cette opération est à discuter, car mentionné qu'on ne supprimera pas de transaction.)
       parameters:
         - name: id
           in: path

@@ -23,7 +23,8 @@ export const login = createAsyncThunk('auth/login', async ({ email, password, re
     });
 
     if (!response.ok) {
-      throw new Error('Failed to login');
+      const errorData = await response.json(); // Récupérer les données de l'erreur
+      throw new Error(errorData.message || 'Invalid Fields'); // Utiliser le message d'erreur de l'API
     }
 
     const data = await response.json();
@@ -90,6 +91,10 @@ const authSlice = createSlice({
       localStorage.removeItem('token'); // Supprime le token du localStorage
       state.status = 'idle';
       state.userName = '';
+      state.error = null; // Réinitialise l'erreur lors de la déconnexion
+    },
+    resetError: (state) => {
+      state.error = null; // Action pour réinitialiser l'erreur
     },
   },
   extraReducers: (builder) => {
@@ -100,12 +105,14 @@ const authSlice = createSlice({
       })
       .addCase(login.pending, (state) => {
         state.status = 'loading';
+        state.error = null; // Réinitialise l'erreur lors de la connexion
       })
       .addCase(login.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.token = action.payload.token; // Assigne le token à l'état
         // Note : Le stockage du token dans le localStorage se fait dans l'action login
         state.userName = action.payload.userName || '';
+        state.error = null; // Réinitialise l'erreur lors de la connexion
       })
       .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
