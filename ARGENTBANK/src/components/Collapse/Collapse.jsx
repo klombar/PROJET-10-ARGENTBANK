@@ -1,3 +1,4 @@
+import React from "react";
 import "./Collapse.css";
 import PropTypes from 'prop-types';
 import { useState } from "react";

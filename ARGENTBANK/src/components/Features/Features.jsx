@@ -1,10 +1,11 @@
+import React from "react";
 import "./Features.css";
 import PropTypes from "prop-types";
 
 function Features({ icon, title, text }) {
   return (
     <div className="features">
-      <img src={icon} alt="" />
+      <img src={icon} alt="icon features home" />
       <h3>{title}</h3>
       <p>{text}</p>
     </div>
