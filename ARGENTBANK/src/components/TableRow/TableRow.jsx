@@ -15,7 +15,9 @@ function TableRow({ transaction }) {
 
   return (
     <>
-      <div className='tableRowSpace'></div>
+      <tr>
+        <td className='tableRowSpace'></td>
+      </tr>
       <tr>
         <TableCell className={"tableRow-transactions-date"}>{transaction.date}</TableCell>
         <TableCell className={"tableRow-transactions-description"}>{transaction.description}</TableCell>
