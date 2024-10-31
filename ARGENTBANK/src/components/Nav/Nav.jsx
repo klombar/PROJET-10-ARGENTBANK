@@ -9,6 +9,7 @@ function Nav() {
   const userFirstName = useSelector((state) => state.auth.user?.firstName); 
   const userLastName = useSelector((state) => state.auth.user?.lastName);
   const authStatus = useSelector((state) => state.auth.status); 
+  const userName = useSelector((state) => state.auth.userName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -25,8 +26,8 @@ function Nav() {
 
   // Définit le nom d'utilisateur à afficher
   const displayUserName = isAuthenticated 
-    ? `${userFirstName}_${userLastName}` 
-    : "Sign In";
+  ? userName || `${userFirstName}_${userLastName}` // Utiliser userName s'il existe, sinon combiner prénoms et noms
+  : "Sign In";
 
   return (
     <>
