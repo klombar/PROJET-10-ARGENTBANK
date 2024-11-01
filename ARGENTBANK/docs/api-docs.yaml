@@ -6,13 +6,13 @@ info:
 servers:
   - url: http://localhost:3001/api/v1
 paths:
-  /transactions:
+  /transactions/{userId}:
     get:
       summary: Récupérer toutes les transactions pour le mois en cours
       description: Retourne les transactions de l'utilisateur pour le mois en cours, groupées par compte.
       parameters:
         - name: userId
-          in: query
+          in: path
           required: true
           description: ID de l'utilisateur pour lequel récupérer les transactions.
           schema:
@@ -41,14 +41,26 @@ paths:
                           type: string
                         balance:
                           type: string
+                        transactionType:
+                          type: string
+                        notes:
+                          type: array
+                          items:
+                            type: string
         '404':
           description: Aucun utilisateur trouvé avec l'ID spécifié.
 
-  /transactions/{id}:
+  /transactions/{userId}/{id}:
     get:
       summary: Récupérer les détails d'une transaction spécifique
-      description: Retourne les détails d'une transaction donnée par son ID.
+      description: Retourne uniquement le type de transaction, la catégorie et la note.
       parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID de l'utilisateur.
+          schema:
+            type: string
         - name: id
           in: path
           required: true
@@ -63,17 +75,15 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
+                  transactionType:
                     type: string
-                  date:
+                    description: Type de la transaction 
+                  category:
                     type: string
-                    format: date
-                  description:
+                    description: Catégorie de la transaction 
+                  note:
                     type: string
-                  amount:
-                    type: string
-                  balance:
-                    type: string
+                    description: Note associée à la transaction
         '404':
           description: Transaction non trouvée avec l'ID spécifié.
 
@@ -81,6 +91,12 @@ paths:
       summary: Modifier une transaction existante
       description: Met à jour les informations d'une transaction donnée par son ID.
       parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID de l'utilisateur.
+          schema:
+            type: string
         - name: id
           in: path
           required: true
@@ -98,6 +114,11 @@ paths:
                   type: string
                 amount:
                   type: string
+                transactionType:
+                  type: string
+                note:
+                  type: string
+                  description: Note à modifier pour la transaction.
       responses:
         '200':
           description: Transaction mise à jour avec succès.
@@ -113,18 +134,74 @@ paths:
         '400':
           description: Requête invalide. Vérifiez les paramètres fournis.
 
-    delete:
-      summary: Supprimer une transaction
-      description: Supprime une transaction donnée par son ID. (Cette opération est à discuter, car mentionné qu'on ne supprimera pas de transaction.)
+    post:
+      summary: Ajouter une information aux détails d'une transaction
+      description: Ajoute une information aux détails d'une transaction existante.
       parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID de l'utilisateur.
+          schema:
+            type: string
         - name: id
           in: path
           required: true
-          description: ID de la transaction à supprimer.
+          description: ID de la transaction à mettre à jour.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                note:
+                  type: string
+                  description: Note à ajouter à la transaction.
+                category:
+                  type: string
+                  description: Catégorie à ajouter à la transaction.
+                transactionType:
+                  type: string
+                  description: Type de la transaction à ajouter.
+      responses:
+        '200':
+          description: Informations ajoutées avec succès.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: ID de la transaction modifiée.
+        '404':
+          description: Transaction non trouvée avec l'ID spécifié.
+        '400':
+          description: Requête invalide. Vérifiez les paramètres fournis.
+
+    delete:
+      summary: Supprimer des informations d'une transaction
+      description: Supprime certaines informations d'une transaction donnée par son ID.
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID de l'utilisateur.
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: ID de la transaction dont les informations doivent être supprimées.
           schema:
             type: string
       responses:
         '204':
-          description: Transaction supprimée avec succès.
+          description: Informations de la transaction supprimées avec succès.
         '404':
           description: Transaction non trouvée avec l'ID spécifié.
+        '400':
+          description: Requête invalide. Vérifiez les paramètres fournis.

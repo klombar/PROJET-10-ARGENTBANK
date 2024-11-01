@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import './inputField.css';
+import React from 'react';
 
-function InputField({ label, type, value, onChange, className, disabled}) {
+function InputField({ id, label, type, value, onChange, className, disabled}) {
   return (
     <div className={className}>
-      <label>{label}</label>
+      <label htmlFor={id}>{label}</label>
       <input
+        id={id}
+        data-testid="input-field"
         type={type}
         value={value}
         onChange={onChange}

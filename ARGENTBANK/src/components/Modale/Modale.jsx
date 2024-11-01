@@ -1,9 +1,10 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, fetchUserProfile } from '../../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 import Form from "../Form/Form";
-import InputField from '../InputField/inputField';
+import InputField from '../InputField/InputField';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
 import "./Modale.css";
@@ -49,6 +50,8 @@ function Modale() {
       {error && <p className="error">{error}</p>}
       <Form handleSubmit={handleSubmit} className="modal-form">
         <InputField
+          id="email"
+          htmlFor="email"
           className="signIn-inputField"
           label="Email"
           type="email"
@@ -57,6 +60,8 @@ function Modale() {
           required
         />
         <InputField
+          id="password"
+          htmlFor="password"
           className="signIn-inputField"
           label="Password"
           type="password"
@@ -65,6 +70,8 @@ function Modale() {
           required
         />
         <Checkbox
+          id="rememberMe"
+          htmlFor="rememberMe"
           label="Remember Me"
           checked={rememberMe}
           onChange={(e) => setRememberMe(e.target.checked)}

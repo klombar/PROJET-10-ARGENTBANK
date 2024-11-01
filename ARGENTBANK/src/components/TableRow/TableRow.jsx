@@ -11,7 +11,7 @@ function TableRow({ transaction }) {
     setIsOpen(!isOpen);
   };
 
-  const dropdownOptions = ["Edit", "Delete"]; 
+  const dropdownOptions = ["Edit"]; 
 
   return (
     <>
