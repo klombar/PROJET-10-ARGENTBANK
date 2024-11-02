@@ -112,8 +112,6 @@ paths:
               properties:
                 description:
                   type: string
-                transactionType:
-                  type: string
                 note:
                   type: string
                   description: Note à modifier pour la transaction.
@@ -155,10 +153,10 @@ paths:
             schema:
               type: object
               properties:
-                note:
+                note supplémentaire:
                   type: string
                   description: Note à ajouter à la transaction.
-                category:
+                category supplémentaire:
                   type: string
                   description: Catégorie à ajouter à la transaction.
       responses:

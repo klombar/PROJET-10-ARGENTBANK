@@ -1,7 +1,8 @@
 import "./Dashboard.css";
 import "../../components/Button/Button.css"
-import Main from "../../Layout/Main/Main";
 import "../../Layout/Main/Main.css";
+import Main from "../../Layout/Main/Main";
+import Form from "../../components/Form/Form";
 import Collapse from "../../components/Collapse/Collapse";
 import TransactionTable from "../../components/TransactionTable/TransactionTable";
 import InputField from "../../components/InputField/InputField";
@@ -63,45 +64,45 @@ function Dashboard() {
         {!isFormVisible && (
           <div className="dashBoard-header">
           <h1>Welcome Back <br />{userFirstName} {userLastName} !</h1>
-          <Button value="Edit Name" onClick={toggleFormVisibility} className={"open-Edit-User-button"}/>
+          <Button value="Edit UserName" onClick={toggleFormVisibility} className={"open-Edit-User-button"}/>
           </div>
         )}
 
-        {isFormVisible && (
-          <form className="dashBoard-form" onSubmit={handleSubmit}>
-            <h1>Edit User Info</h1>
-            <InputField 
-              className="dashBoard-inputField-wrapper" 
-              type="text" 
-              label="User Name :" 
-              name="User Name" 
-              value={localUserName}
-              onChange={handleUserNameChange}
-            />
-            <InputField
-              className="dashBoard-inputField-wrapper" 
-              type="text" 
-              label="First Name :" 
-              name="First Name" 
-              value={isAuthenticated ? `${userFirstName}` : " "}
-              onChange={handleUserNameChange}
-              disabled
-            />
-            <InputField 
-              className="dashBoard-inputField-wrapper" 
-              type="text" 
-              label="Last Name :" 
-              name="Last Name" 
-              value={isAuthenticated ? `${userLastName}` : " "}
-              onChange={handleUserNameChange}
-              disabled
-            />
-            <div className="dashBoard-submitButton-wrapper">
-              <Button value="Save" onClick={handleSubmit} className={"signIn-Modale-Submit"}/>
-              <Button value="Cancel" onClick={toggleFormVisibility} className={"signIn-Modale-Submit"}/>
-            </div>
-          </form>
-        )}
+{isFormVisible && (
+  <Form className="dashBoard-form" handleSubmit={handleSubmit}>
+    <h1>Edit User Info</h1>
+    <InputField 
+      className="dashBoard-inputField-wrapper" 
+      type="text" 
+      label="User Name :" 
+      name="User Name" 
+      value={localUserName}
+      onChange={handleUserNameChange}
+    />
+    <InputField
+      className="dashBoard-inputField-wrapper" 
+      type="text" 
+      label="First Name :" 
+      name="First Name" 
+      value={isAuthenticated ? `${userFirstName}` : " "}
+      onChange={handleUserNameChange}
+      disabled
+    />
+    <InputField 
+      className="dashBoard-inputField-wrapper" 
+      type="text" 
+      label="Last Name :" 
+      name="Last Name" 
+      value={isAuthenticated ? `${userLastName}` : " "}
+      onChange={handleUserNameChange}
+      disabled
+    />
+    <div className="dashBoard-submitButton-wrapper">
+      <Button value="Save" onClick={handleSubmit} type="submit" className={"signIn-Modale-Submit"} />
+      <Button value="Cancel" onClick={toggleFormVisibility} className={"signIn-Modale-Submit"} />
+    </div>
+  </Form>
+)}
 
         <Collapse className={"align-left"} title={"Argent Bank Checking (x8349)"} amount={"$2,082.79"} subtitle={"Available Balance"}>
           <TransactionTable />

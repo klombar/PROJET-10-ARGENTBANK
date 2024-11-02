@@ -14,7 +14,6 @@ export const login = createAsyncThunk('auth/login', async ({ email, password, re
       }),
     });
 
-   
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Invalid Fields'); 
