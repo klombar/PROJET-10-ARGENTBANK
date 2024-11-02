@@ -112,8 +112,6 @@ paths:
               properties:
                 description:
                   type: string
-                amount:
-                  type: string
                 transactionType:
                   type: string
                 note:
@@ -163,9 +161,6 @@ paths:
                 category:
                   type: string
                   description: Catégorie à ajouter à la transaction.
-                transactionType:
-                  type: string
-                  description: Type de la transaction à ajouter.
       responses:
         '200':
           description: Informations ajoutées avec succès.
