@@ -4,7 +4,7 @@ import Main from "../../Layout/Main/Main";
 import "../../Layout/Main/Main.css";
 import Collapse from "../../components/Collapse/Collapse";
 import TransactionTable from "../../components/TransactionTable/TransactionTable";
-import InputField from "../../components/InputField/inputField";
+import InputField from "../../components/InputField/InputField";
 import Button from "../../components/Button/Button"; 
 import { setUserName } from "../../redux/authSlice";
 import { useEffect, useState } from "react";

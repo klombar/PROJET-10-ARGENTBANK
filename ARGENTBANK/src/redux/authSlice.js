@@ -1,14 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Action pour vérifier l'authentification au démarrage
-export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
-  const token = localStorage.getItem('token'); 
-  if (!token) {
-    throw new Error('No token found'); 
-  }
-  return token; 
-});
-
 // Action pour gérer la connexion de l'utilisateur
 export const login = createAsyncThunk('auth/login', async ({ email, password, rememberMe }, thunkAPI) => {
   try {
@@ -106,10 +97,6 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(checkAuth.fulfilled, (state, action) => {
-        state.token = action.payload; 
-        state.status = 'succeeded'; 
-      })
       .addCase(login.pending, (state) => {
         state.status = 'loading'; 
         state.error = null; 
