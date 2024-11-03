@@ -30,9 +30,6 @@
    align-items: center;
    gap: 5px;
    font-weight: bold;
-   @media screen and (max-width: 500px){
-   margin-bottom: 10px;
-   }
 }
 
 .header-nav p:hover{
