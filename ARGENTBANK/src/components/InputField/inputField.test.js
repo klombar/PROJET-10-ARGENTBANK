@@ -1,7 +1,7 @@
 // InputField.test.js
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import InputField from './InputField'; // Ajuste le chemin d'importation si nécessaire
+import InputField from './InputField';
 
 describe('InputField Component', () => {
   const mockOnChange = jest.fn();

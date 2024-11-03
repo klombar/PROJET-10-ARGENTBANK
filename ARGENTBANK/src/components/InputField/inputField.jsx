@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './inputField.css';
+import './InputField.css';
 import React from 'react';
 
 function InputField({ id, label, type, value, onChange, className, disabled}) {
