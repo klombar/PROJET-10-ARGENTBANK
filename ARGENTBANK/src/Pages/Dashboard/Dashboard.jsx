@@ -18,12 +18,13 @@ function Dashboard() {
   const isAuthenticated = useSelector((state) => state.auth.token !== null);
   const userFirstName = useSelector((state) => state.auth.user?.firstName); 
   const userLastName = useSelector((state) => state.auth.user?.lastName);
+  const userName = useSelector((state) => state.auth.userName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [profileFetched, setProfileFetched] = useState(false);
-  const [localUserName, setLocalUserName] = useState(`${userFirstName}_${userLastName}`);
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [localUserName, setLocalUserName] = useState(userName);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -38,20 +39,14 @@ function Dashboard() {
     } 
   }, [isAuthenticated, profileFetched, dispatch]);
 
-  useEffect(() => {
-    if (isAuthenticated && userFirstName && userLastName) {
-      setLocalUserName(`${userFirstName}_${userLastName}`);
-    }
-  }, [isAuthenticated, userFirstName, userLastName]);
-
-  const handleUserNameChange = (e) => {
-    setLocalUserName(e.target.value);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(setUserName(localUserName));
     setIsFormVisible(false);
+  };
+
+  const handleUserNameChange = (event) => {
+    setLocalUserName(event.target.value);
   };
 
   const toggleFormVisibility = () => {

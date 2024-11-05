@@ -67,29 +67,26 @@ export const fetchUserProfile = createAsyncThunk('auth/fetchUserProfile', async 
 
 // Slice pour la gestion de l'authentification
 const authSlice = createSlice({
-  name: 'auth', // Nom du slice
+  name: 'auth',
   initialState: {
-    user: null, 
+    user: null,
     token: localStorage.getItem('token'),
-    status: 'idle', 
+    status: 'idle',
     error: null,
-    userName: '', 
+    userName: localStorage.getItem("userName") || '', 
   },
   reducers: {
-    // Reducer pour définir le nom d'utilisateur
     setUserName: (state, action) => {
-      state.userName = action.payload; 
+      state.userName = action.payload;
+      localStorage.setItem("userName", action.payload);
     },
-    // Reducer pour déconnecter l'utilisateur
     logout: (state) => {
-      state.user = null; 
+      state.user = null;
       state.token = null;
-      localStorage.removeItem('token'); 
-      state.status = 'idle'; 
       state.userName = '';
-      state.error = null; 
+      localStorage.removeItem("token");
+      localStorage.removeItem("userName");  
     },
-    // Action pour réinitialiser l'erreur
     resetError: (state) => {
       state.error = null;
     },
@@ -97,18 +94,19 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.status = 'loading'; 
-        state.error = null; 
+        state.status = 'loading';
+        state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.token = action.payload.token; 
+        state.token = action.payload.token;
         state.userName = action.payload.userName || ''; 
-        state.error = null; 
+        localStorage.setItem("userName", action.payload.userName || ''); 
+        state.error = null;
       })
       .addCase(login.rejected, (state, action) => {
-        state.status = 'failed'; 
-        state.error = action.payload; 
+        state.status = 'failed';
+        state.error = action.payload;
       })
       .addCase(fetchUserProfile.pending, (state) => {
         state.status = 'loading';
@@ -118,13 +116,11 @@ const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(fetchUserProfile.rejected, (state, action) => {
-        state.status = 'failed'; 
-        state.error = action.payload; 
+        state.status = 'failed';
+        state.error = action.payload;
       });
   },
 });
 
-// Exporter les actions du slice
 export const { logout, setUserName } = authSlice.actions;
-// Exporter le reducer par défaut
 export default authSlice.reducer;

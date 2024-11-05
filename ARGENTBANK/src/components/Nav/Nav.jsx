@@ -1,34 +1,35 @@
-import React from "react";
-import { useEffect } from "react";
-import "./Nav.css";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUserProfile, logout } from "../../redux/authSlice"; 
+import { fetchUserProfile, logout } from "../../redux/authSlice";
+import "./Nav.css";
 
 function Nav() {
   const isAuthenticated = useSelector((state) => state.auth.token !== null);
-  const userFirstName = useSelector((state) => state.auth.user?.firstName); 
+  const userFirstName = useSelector((state) => state.auth.user?.firstName);
   const userLastName = useSelector((state) => state.auth.user?.lastName);
+  const userNameState = useSelector((state) => state.auth.userName);
   const authStatus = useSelector((state) => state.auth.status); 
-  const userName = useSelector((state) => state.auth.userName);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchUserProfile());
-    } 
+    }
   }, [isAuthenticated, dispatch]);
+
+ 
+  const userName = userNameState || `${userFirstName}_${userLastName}`;
+
+
+  const displayUserName = isAuthenticated ? userName : "Sign In";
 
   const handleLogout = () => {
     dispatch(logout()); 
     navigate("/"); 
   };
-
-  // Définit le nom d'utilisateur à afficher
-  const displayUserName = isAuthenticated 
-  ? userName || `${userFirstName}_${userLastName}` // Utiliser userName s'il existe, sinon combiner prénoms et noms
-  : "Sign In";
 
   return (
     <>
@@ -41,7 +42,8 @@ function Nav() {
             <p className={`${isAuthenticated ? "connected-user-color" : "no-connected-user-color"}`}>
               {displayUserName}
             </p> 
-          </Link> 
+          </Link>
+          
           {isAuthenticated && (
             <p onClick={handleLogout} className="nav-logout">
               <i className="fa fa-sign-out"></i>
