@@ -5,8 +5,19 @@ info:
   description: API pour gérer les transactions des utilisateurs.
 servers:
   - url: http://localhost:3001/api/v1
+components:
+  securitySchemes:
+    BearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  
+  
+
+security:
+  - BearerAuth: [] 
+
 paths:
-  /transactions/{userId}:  # Le chemin doit commencer par "/"
+  /transactions/{userId}:  
     get:
       summary: Récupérer toutes les transactions pour le mois en cours
       description: Retourne les transactions de l'utilisateur pour le mois en cours, groupées par compte.
@@ -17,6 +28,8 @@ paths:
           description: ID de l'utilisateur pour lequel récupérer les transactions.
           schema:
             type: string
+      security:
+        - BearerAuth: [] 
       responses:
         '200':
           description: Liste des transactions récupérées avec succès.
@@ -53,7 +66,7 @@ paths:
         '404':
           description: Aucun utilisateur trouvé avec l'ID spécifié.
 
-  /transactions/{userId}/{id}/transactionDetails:  # Le chemin doit commencer par "/"
+  /transactions/{userId}/{id}/transactionDetails: 
     get:
       summary: Récupérer les détails d'une transaction spécifique
       description: Retourne uniquement les détails de la transaction, incluant le type de transaction, la catégorie et la note.
@@ -70,6 +83,8 @@ paths:
           description: ID de la transaction à récupérer.
           schema:
             type: string
+      security:
+        - BearerAuth: []  
       responses:
         '200':
           description: Détails de la transaction récupérés avec succès
@@ -93,7 +108,7 @@ paths:
           description: Requête invalide. Vérifiez les paramètres fournis.
 
     put:
-      summary: Modifier les details d'une transaction existante
+      summary: Modifier les détails d'une transaction existante
       description: Met à jour les informations d'une transaction donnée par son ID.
       parameters:
         - name: userId
@@ -108,6 +123,8 @@ paths:
           description: ID de la transaction à mettre à jour.
           schema:
             type: string
+      security:
+        - BearerAuth: [] 
       requestBody:
         required: true
         content:
@@ -151,6 +168,8 @@ paths:
           description: ID de la transaction à mettre à jour.
           schema:
             type: string
+      security:
+        - BearerAuth: []  
       requestBody:
         required: true
         content:
@@ -196,6 +215,8 @@ paths:
           description: ID de la transaction dont les informations doivent être supprimées.
           schema:
             type: string
+      security:
+        - BearerAuth: [] 
       responses:
         '204':
           description: Informations de la transaction supprimées avec succès.
