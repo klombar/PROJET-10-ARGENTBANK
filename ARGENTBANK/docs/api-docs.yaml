@@ -6,7 +6,7 @@ info:
 servers:
   - url: http://localhost:3001/api/v1
 paths:
-  /transactions/{userId}:
+  /transactions/{userId}:  # Le chemin doit commencer par "/"
     get:
       summary: Récupérer toutes les transactions pour le mois en cours
       description: Retourne les transactions de l'utilisateur pour le mois en cours, groupées par compte.
@@ -41,19 +41,22 @@ paths:
                           type: string
                         balance:
                           type: string
-                        transactionType:
-                          type: string
-                        notes:
-                          type: array
-                          items:
-                            type: string
+                        transactionDetails:
+                          type: object
+                          properties:
+                            transactionType:
+                              type: string
+                            category:
+                              type: string
+                            notes:
+                              type: string
         '404':
           description: Aucun utilisateur trouvé avec l'ID spécifié.
 
-  /transactions/{userId}/{id}:
+  /transactions/{userId}/{id}/transactionDetails:  # Le chemin doit commencer par "/"
     get:
       summary: Récupérer les détails d'une transaction spécifique
-      description: Retourne uniquement le type de transaction, la catégorie et la note.
+      description: Retourne uniquement les détails de la transaction, incluant le type de transaction, la catégorie et la note.
       parameters:
         - name: userId
           in: path
@@ -69,26 +72,28 @@ paths:
             type: string
       responses:
         '200':
-          description: Détails de la transaction récupérés avec succès.
+          description: Détails de la transaction récupérés avec succès
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  transactionType:
-                    type: string
-                    description: Type de la transaction 
-                  category:
-                    type: string
-                    description: Catégorie de la transaction 
-                  note:
-                    type: string
-                    description: Note associée à la transaction
+                  transactionDetails: 
+                    type: object
+                    properties:
+                      transactionType:
+                        type: string
+                      category:
+                        type: string
+                      notes:
+                        type: string
         '404':
           description: Transaction non trouvée avec l'ID spécifié.
+        '400':
+          description: Requête invalide. Vérifiez les paramètres fournis.
 
     put:
-      summary: Modifier une transaction existante
+      summary: Modifier les details d'une transaction existante
       description: Met à jour les informations d'une transaction donnée par son ID.
       parameters:
         - name: userId
@@ -110,7 +115,7 @@ paths:
             schema:
               type: object
               properties:
-                description:
+                category:
                   type: string
                 note:
                   type: string
@@ -153,10 +158,10 @@ paths:
             schema:
               type: object
               properties:
-                note supplémentaire:
+                detail1 rajouté:
                   type: string
                   description: Note à ajouter à la transaction.
-                category supplémentaire:
+                detail2 rajouté:
                   type: string
                   description: Catégorie à ajouter à la transaction.
       responses:
