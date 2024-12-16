@@ -1,72 +1,54 @@
-# Project #10 - Argent Bank API
+# Argent Bank - Phase 1 : Authentification des utilisateurs
 
-This codebase contains the code needed to run the backend for Argent Bank.
+![Argentbank](https://github.com/user-attachments/assets/de583431-6b10-4aad-8bb1-c2c6e2309e54)
 
-## Getting Started
+## Contexte
 
-### Prerequisites
+Argent Bank est une nouvelle banque en ligne, et vous avez été engagé en tant que développeur front-end pour participer à la création du tableau de bord des utilisateurs. Ce projet vise à créer une application web réactive avec React, permettant aux utilisateurs de s'authentifier et de gérer leurs informations de profil.
 
-Argent Bank uses the following tech stack:
+## Objectifs du projet
 
-- [Node.js v12](https://nodejs.org/en/)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+Cette phase 1 se concentre sur l'implémentation de l'authentification des utilisateurs. L'application doit permettre :
 
-Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
+- La page d'accueil accessible à tous.
+- Une page de connexion où l'utilisateur peut entrer son identifiant et mot de passe. Des messages d'erreur doivent s'afficher en cas de saisie incorrecte.
+- La gestion de l'authentification : un utilisateur peut se connecter, se déconnecter et accéder à son profil.
+- Le profil utilisateur : seul l'utilisateur connecté peut voir et modifier son pseudo.
+- Utilisation de **Redux** pour gérer le state global de l'application.
 
-```bash
-# Check Node.js version
-node --version
+## Features
 
-# Check Mongo version
-mongo --version
-```
+- **Page d'accueil** : accessible sans connexion.
+- **Page de connexion** : gestion des erreurs d'authentification.
+- **Page de profil** : affichage des informations de l'utilisateur avec possibilité de modification du pseudo.
+- **Déconnexion** : bouton pour se déconnecter du système.
+  
+## Technologies
 
-### Instructions
+- **React** : pour la construction de l'application web.
+- **Redux** : pour la gestion d'état de l'application.
+- **API Back-End** : communication avec des routes API existantes (documentation Swagger incluse).
+- **Responsive Design** : l'application doit être adaptée à toutes les tailles d'écran.
 
-1. Fork this repo
-1. Clone the repo onto your computer
-1. Open a terminal window in the cloned project
-1. Run the following commands:
+## Bonnes pratiques
 
-```bash
-# Install dependencies
-npm install
+- **Green Code** : optimiser les images pour les performances (poids et dimensions).
+- **Composants réutilisables** : créer des composants modulaires et réutilisables pour rendre le code plus maintenable.
 
-# Start local dev server
-npm run dev:server
+## Instructions
 
-# Populate database with two users
-npm run populate-db
-```
+1. Forkez le repository et clonez-le sur votre machine locale.
+2. Installez les dépendances : `npm install`.
+3. Lancez l'application en local : `npm start`.
+4. Implémentez les fonctionnalités selon les spécifications de la phase 1.
+5. Créez des issues pour suivre l'avancement du travail et les bugs à résoudre.
 
-Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
+## Ressources
 
-## Populated Database Data
+- **Swagger Documentation** : pour les routes API back-end.
+- **Mock-ups** : les maquettes visuelles de l'application à implémenter.
 
-Once you run the `populate-db` script, you should have two users in your database:
+## Auteurs
 
-### Tony Stark
-
-- First Name: `Tony`
-- Last Name: `Stark`
-- Email: `tony@stark.com`
-- Password: `password123`
-
-### Steve Rogers
-
-- First Name: `Steve`,
-- Last Name: `Rogers`,
-- Email: `steve@rogers.com`,
-- Password: `password456`
-
-## API Documentation
-
-To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
-
-## Design Assets
-
-Static HTML and CSS has been created for most of the site and is located in: `/designs`.
-
-For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
-
-And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
+- **Avery Moreau** - CTO @ArgentBank
+- **Mila** - Cheffe de projet
